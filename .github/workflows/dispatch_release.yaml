@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: '`vx.y.z` 형태로 버전을 입력해주세요.'
+        description: 'enter version(x.y.z)'
         required: true
         default: v1.0.0
 
 env:
   TAG: ${{ github.event.inputs.tag }}
-  SLACK_WEBHOOK_URL: ${{secrets.SLACK_WEBHOOK_URL}}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   owner_check:
@@ -104,7 +104,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           path: .
-          repository: cloudforetdev/${{ env.SERVICE }}
+          repository: pyengine/${{ env.SERVICE }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ env.VERSION }}
@@ -112,7 +112,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           path: .
-          repository: cloudforet/${{ env.SERVICE }}
+          repository: spaceone/${{ env.SERVICE }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ env.VERSION }}
